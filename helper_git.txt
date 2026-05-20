@@ -85,8 +85,14 @@
   - save locally (working directory)
 
       git add helper_git.txt
-      git commit -m "first attempt for helper_git.txt"
-      git push -u origin main [Matt Harrison recommends]
+      git commit -m "first attempt for helper_git.txt"      # commit f991bc15bc863a806ce235143496d43efdc2a325 (HEAD -> main)
+      git push -u origin main [Matt Harrison recommends]    # commit f175e5ccfcc9113c3c6439e2523a5785e07a12b9 (origin/main)
+
+  - check commit difference
+      git diff file.txt                 # last commit verses latest unstaged file
+      git diff --staged helper_git.txt  # last commit verses latest   staged file
+      git diff hash1 hash2              # diff of two committed files
+      git diff HEAD HEAD~1              # diff of two committed files
 
 
 
