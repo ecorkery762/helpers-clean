@@ -1,0 +1,21 @@
+1 Installation Airflow
+
+
+
+
+
+
+
+1 Installation Airflow
+
+docker --version                                            # check docker installed
+docker-compose --version
+
+https://github.com/puckel/docker-airflow                    # zip download
+cd projects/docker-airflow-master                           # project directory
+
+docker-compose -f docker-compose-LocalExecutor.yml up -d    # yaml once off run
+docker images                                               # images
+docker ps                                                   # running images
+
+http://localhost:8080/admin/                                # local Airflow

@@ -1,12 +1,22 @@
-1. SSH Set-up
-1.1 Confirmation
-1.2.1 PAT
-1.2.1 SSH
+1. GIT SSH Set-up
+1.1 Confirmation - setup SSH from scratch
+1.2 SSH - only if switching from PAT to SSH (done per PAT project)
+1.3 SSH remove git tracking
+
+2. Basic GIT commands
 
 
 
-1. GIT
-1.1 Confirmation
+
+
+
+
+
+
+
+
+1. GIT - SSH Set-up
+1.1 Confirmation - setup SSH from scratch
 
     git clone git@github.com:ecorkery762/helpers-clean.git
     cd helpers-clean
@@ -14,13 +24,16 @@
 
     ls -l ../helpers
 
+    # confirm SSH commention
+    (base) ec@Erics-MacBook-Pro helpers-clean % git remote -v
+    origin	git@github.com:ecorkery762/helpers-clean.git (fetch)
+    origin	git@github.com:ecorkery762/helpers-clean.git (push)
+    ssh -T git@github.com
+
+    git-ls files
 
 
-
-
-
-
-    SSH - only if switching from PAT to SSH (done per PAT project)
+1.2 SSH - only if switching from PAT to SSH (done per PAT project)
 
     Explicit set of directory:
     retail-streamlit % git remote set-url origin git@github.com:ecorkery762/retail-streamlit.git
@@ -33,9 +46,9 @@
     Enumerating objects: 4, done.
 
 
-1.2 SSH remove git tracking
+1.3 SSH remove git tracking
 
-1.2.1 ignore and stop git tracking
+1.3.1 ignore and stop git tracking
       (base) ec@Erics-MacBook-Pro helpers % echo "helper_environment.txt" >> .gitignore
       (base) ec@Erics-MacBook-Pro helpers % echo "PAT" >> .gitignore
       (base) ec@Erics-MacBook-Pro helpers % git rm --cached helper_environment.txt
@@ -51,7 +64,7 @@
       (base) ec@Erics-MacBook-Pro helpers % git ls-files | grep helper_environment
       (base) ec@Erics-MacBook-Pro helpers %
 
-8.1 Clear up a repository
+1.3.2 Clear up a repository
     - on laptop in the directory use command rm -rf .git
     - gitub select repository and in settings (repo not personal)
     - delect 'delete', have to type the repository name and password.
@@ -59,11 +72,21 @@
 
 
 
-    Local (master branch)
-    - git clone link from github
-    - git status and git init
-    - edit a file
-    - save locally (working directory)
+
+
+
+
+2. Basic GIT commands
+
+  Local (master branch)
+  - git clone link from github
+  - git status and git init
+  - edit a file
+  - save locally (working directory)
+
+      git add helper_git.txt
+      git commit -m "first attempt for helper_git.txt"
+      git push -u origin main [Matt Harrison recommends]
 
 
 
@@ -72,27 +95,8 @@
 
 
 
+Appendix 1: Git Push personal access token
 
-
-    Local to staging before pushing to github
-    - git add to place file in staging area (including git add .). Note: still local only
-    - git commit them (all added files) to the master branch which we have locally
-
-    Staging to github
-    - Check for remote branch (will have if cloned from github) with command git remote -v [v for view].
-      This command returns the url of the remote repo.
-    - By convention the remote branch is named "origin"
-    - Note: when creating a repository on github you will have the option of cloning a local directory.
-      But we created on github first and then cloned to local in the setup phase.
-    - Note: git remote rename and git remote remove to rename and remove the remote repository.
-    - Command: git push -u origin main
-
-    Git Push
-    Git push - old method
-        git add helper_git.txt
-        git commit -m "first attempt for helper_git.txt"
-        git push -u origin main  [user:  ecorkery762  password: ]   ... Authentication - see 1.2
-        git push -u origin main [Matt Harrison recommends]
 
         Git fails authentication with:
         remote: Invalid username or token. Password authentication is not supported for Git operations.
