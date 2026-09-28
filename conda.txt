@@ -1,0 +1,126 @@
+
+
+1. Create environment
+
+2. Package tracking and configuration management
+2.1 Listing packages
+2.2 The environment configuration
+2.2.1 Directory structure
+2.2.2 Create YML and recreate environment later
+
+3. Environment variable storage and handling (ALPHAVANTAGE_API_KEY)
+
+
+
+
+
+
+
+
+1. Create environment
+   ==================
+
+conda create --name geo python=3.14      # 1.14 was NOT installed on the laptop (python --version), see Issue 1
+conda create --name finance -c conda-forge python=3.14
+
+conda activate geo
+conda deactivate
+
+conda install --channel conda-forge requests emoji
+conda remove --name geo --all
+
+conda info --envs
+
+conda create -help
+
+
+
+
+
+2. Package tracking and configuration management
+   =============================================
+
+2.1 Listing packages
+
+   conda env list   # list environments
+   conda list       # list packages
+
+2.2 The environment configuration
+
+2.2.1 Directory structure
+
+finance-gold/
+├── environment.yml
+├── notebooks/
+├── data/
+│   └── gold/
+│       └── raw/
+└── ...
+
+2.2.2 Create YML and recreate environment later
+
+conda env export --name finance > environment.yml            # will include conda dependencies for MAC current osx-64 platform;
+conda env export --from-history > environment-history.yml    # packages only, will re-create anywhere
+conda env create -f environment.yml
+
+do both exports so that you have
+
+finance-gold/
+├── environment.yml
+└── environment-history.yml
+
+
+
+
+
+
+
+
+
+
+
+3. Environment variable storage and handling (ALPHAVANTAGE_API_KEY)
+   ================================================================
+
+# terminal set in the conda virtual environmant
+conda env config vars set ALPHAVANTAGE_API_KEY="eric_comment_QWLW63X14VPD0W7B"
+conda deactivate
+conda activate finance
+WARNING: overwriting environment variables set in the machine
+overwriting variable ['ALPHAVANTAGE_API_KEY']
+
+# terminal check
+python -c "import os; print('Alpha Vantage key set:', bool(os.environ.get('ALPHAVANTAGE_API_KEY')))"
+Alpha Vantage key set: True
+(finance) ec@Erics-MacBook-Pro finance-yahoo %
+
+
+
+
+
+
+
+
+
+
+
+ISSUES:
+=======
+
+Issue 1:
+
+conda create --name geo python=3.14   # 1.14 was NOT installed on the laptop (python --version)
+
+  Issue:
+    Your Miniconda installation is running as osx-64 (Intel/x86_64), and the defaults channel you're
+    using doesn't currently have a Python 3.14 package for that platform.
+
+    That's why Conda says:
+    PackagesNotFoundError: python=3.14
+
+  Checks:
+    uname -m   ... gives x86_64 which is correct
+
+  Solution:
+    switch to 1.13 OR conda create --name finance -c conda-forge python=3.14 ... This was done and worked.
+    ChatGPT: Conda-forge may have a Python 3.14 build for osx-64 even though your defaults channel doesn't

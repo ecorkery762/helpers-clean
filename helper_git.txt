@@ -6,7 +6,12 @@
 2. Basic GIT commands
 
 
+git branch --show-current       # check the branch
+git status
+git remote -v
 
+git branch -M main              # push to main NOT master (legacy default)
+git push -u origin main
 
 
 
@@ -93,6 +98,31 @@
       git diff --staged helper_git.txt  # last commit verses latest   staged file
       git diff hash1 hash2              # diff of two committed files
       git diff HEAD HEAD~1              # diff of two committed files
+
+  - restoring a file
+      git restore --staged helper_git.txt            # staged file
+      git checkout HEAD~1 [or hash]-- report.md      # committed file
+
+  - restoring a hash or commit
+      git revert
+
+
+3. Troubleshooting
+
+3.1 Commit
+
+3.1.1 Your branch is ahead of 'origin/main' by 1 commit. And - I created a README on Github
+      git pull --rebase origin main     # downloads the remote commits and replays the local commit
+      git push -u origin main
+
+3.1.2 Git indicates confilct in a specific file helper_git.txt - look for pattern below and remove
+
+      <<<<<<< HEAD
+      =======
+      >>>>>>>
+
+      git add helper_git.txt
+      git rebase --continue
 
 
 
